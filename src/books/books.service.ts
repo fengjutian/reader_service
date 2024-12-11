@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Book } from './entities/book.entity';
-import { Repository } from 'typeorm';
+import { Books } from './entities/book.entity';
+import { ObjectId, Repository } from 'typeorm';
 
 @Injectable()
 export class BooksService {
   constructor(
-    @InjectRepository(Book) private bookRepository: Repository<Book>,
+    @InjectRepository(Books)
+    private bookRepository: Repository<Books>,
   ) {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   create(createBookDto: CreateBookDto) {
@@ -20,13 +21,19 @@ export class BooksService {
   // }
 
   async findAll() {
-    const books = this.bookRepository.find();
-    console.log(books);
+    const books = await this.bookRepository.find({ cache: false });
 
-    // const allUsers = await Book.find();
-    // console.log('allUsers', allUsers);
-    // return Book.find();
-    return `This action returns all books`;
+    // const books = await this.bookRepository.findOneBy({
+    //   id: 45,
+    // });
+
+    // console.log('books', books);
+
+    // const books = await this.bookRepository.findOne({ id: 45 });
+    // console.log('books', books);
+
+    return books;
+    // return `This action returns all books`;
   }
 
   findOne(id: number) {

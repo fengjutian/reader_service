@@ -1,20 +1,20 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class Book {
+@Entity({ name: 'books' })
+export class Books {
   @PrimaryGeneratedColumn()
   id: number;
 
   // 标题
-  @Column()
+  @Column('varchar', { length: 255 })
   name: string;
 
   // 副标题
-  @Column()
+  @Column({ length: 255 })
   sub_name: string;
 
   // 作者
-  @Column()
+  @Column({ length: 255 })
   author: string;
 
   // 出版社
