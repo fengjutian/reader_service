@@ -6,11 +6,11 @@ export class Books {
   id: number;
 
   // 标题
-  @Column('varchar', { length: 255 })
+  @Column('varchar', { name: 'name', length: 255 })
   name: string;
 
   // 副标题
-  @Column({ length: 255 })
+  @Column({ name: 'sub_name', length: 255 })
   sub_name: string;
 
   // 作者
@@ -30,6 +30,10 @@ export class Books {
   original_author: string;
 
   // 译者
+  @Column()
+  translator: string;
+
+  // 出版年
   @Column()
   year_of_publication: string;
 
