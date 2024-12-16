@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Req,
+  Query,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -22,14 +23,21 @@ export class BooksController {
   }
 
   @Get()
-  findAll() {
-    // return 'Hello findAll';
-    return this.booksService.findAll();
+  findAll(
+    @Query('pageNum') pageNum: number,
+    @Query('pageSize') pageSize: number,
+  ) {
+    console.log('pageNum', pageNum, 'pageSize', pageSize);
+    return this.booksService.findAll({
+      pageNum,
+      pageSize,
+    });
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.booksService.findOne(+id);
+  @Get('/getBook')
+  findOne(@Query('id') id: number, @Query('name') name: string) {
+    console.log('id-----', id);
+    return this.booksService.findOne(id, name);
   }
 
   @Patch(':id')

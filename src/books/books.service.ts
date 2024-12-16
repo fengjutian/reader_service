@@ -35,9 +35,12 @@ export class BooksService {
     // return 'This action adds a new book';
   }
 
-  async findAll() {
-    const books = await this.bookRepository.find({ cache: false });
-
+  async findAll(paramsObj: { pageNum: number; pageSize: number }) {
+    const books = await this.bookRepository.find({
+      cache: false,
+      skip: (paramsObj.pageNum - 1) * paramsObj.pageSize,
+      take: paramsObj.pageSize,
+    });
     // const books = await this.bookRepository.findOneBy({
     //   id: 45,
     // });
@@ -51,8 +54,9 @@ export class BooksService {
     // return `This action returns all books`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} book`;
+  async findOne(id: number, name: string) {
+    const book = await this.bookRepository.find({ where: { id, name } });
+    return book;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
