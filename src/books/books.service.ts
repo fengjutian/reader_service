@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -56,6 +56,7 @@ export class BooksService {
   }
 
   async findOne(id: number, name: string) {
+    Logger.log(id, name);
     const book = await this.bookRepository.find({ where: { id, name } });
     return book;
   }
