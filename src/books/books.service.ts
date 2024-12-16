@@ -4,6 +4,7 @@ import { UpdateBookDto } from './dto/update-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Books } from './entities/book.entity';
 import { ObjectId, Repository } from 'typeorm';
+import { log } from 'console';
 
 @Injectable()
 export class BooksService {
@@ -64,7 +65,9 @@ export class BooksService {
     return `This action updates a #${id} book`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} book`;
+  async remove(id: number) {
+    const msg = await await this.bookRepository.delete(id);
+    console.log('msg', msg);
+    return msg;
   }
 }
