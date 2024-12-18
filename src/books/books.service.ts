@@ -4,7 +4,6 @@ import { UpdateBookDto } from './dto/update-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Books } from './entities/book.entity';
 import { ObjectId, Repository } from 'typeorm';
-import { log } from 'console';
 
 @Injectable()
 export class BooksService {
@@ -14,26 +13,9 @@ export class BooksService {
   ) {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async create(createBookDto: CreateBookDto) {
-    // const book = new Books();
-    // book.name = createBookDto.name;
-    // book.sub_name = 'hello';
-    // book.author = 'hello';
-    // book.publishing_house = 'hello';
-    // book.producer = 'hello';
-    // book.original_author = 'hello';
-    // book.translator = 'hello';
-    // book.year_of_publication = 'hello';
-    // book.pages_num = 'hello';
-    // book.price = 'hello';
-    // book.binding_and_layout = 'hello';
-    // book.ISBN = 'hello';
-    // book.describe = 'hello';
-
     const res = await this.bookRepository.save(createBookDto);
 
     return res;
-    // return createBookDto;
-    // return 'This action adds a new book';
   }
 
   async findAll(paramsObj: { pageNum: number; pageSize: number }) {

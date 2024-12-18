@@ -14,6 +14,7 @@ import {
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { ResponseDto } from '../response/response.dto';
 
 @Controller('books')
 export class BooksController {
@@ -26,15 +27,15 @@ export class BooksController {
   }
 
   @Get()
-  findAll(
+  async findAll(
     @Query('pageNum') pageNum: number,
     @Query('pageSize') pageSize: number,
   ) {
-    console.log('pageNum', pageNum, 'pageSize', pageSize);
-    return this.booksService.findAll({
+    const data = await this.booksService.findAll({
       pageNum,
       pageSize,
     });
+    return ResponseDto.ok(data);
   }
 
   @Get('/getBook')
