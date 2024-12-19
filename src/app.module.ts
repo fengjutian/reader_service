@@ -9,10 +9,10 @@ import { Books } from './books/entities/book.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql', //数据库类型
-      username: 'root', //账号
-      password: 'fengjutian', //密码
+      username: 'root', // 账号
+      password: 'fengjutian', // 密码
       host: '127.0.0.1', //host
-      port: 3306, //
+      port: 3306,
       database: 'reader', //库名
       // entities: [__dirname + '/**/*.entity{.ts,.js}'], //实体文件
       entities: [Books],
