@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { BooksModule } from './books/books.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Books } from './books/entities/book.entity';
+import { AuthorModule } from './author/author.module';
+import { Author } from './author/entities/author.entity';
 
 @Module({
   imports: [
@@ -15,7 +17,7 @@ import { Books } from './books/entities/book.entity';
       port: 3306,
       database: 'reader', //库名
       // entities: [__dirname + '/**/*.entity{.ts,.js}'], //实体文件
-      entities: [Books],
+      entities: [Books, Author],
       synchronize: true, //synchronize字段代表是否自动将实体类同步到数据库
       retryDelay: 500, //重试连接数据库间隔
       retryAttempts: 10, //重试连接数据库的次数
@@ -23,6 +25,7 @@ import { Books } from './books/entities/book.entity';
       logging: true,
     }),
     BooksModule,
+    AuthorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
